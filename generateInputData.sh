@@ -6,9 +6,9 @@ usage()
 {
   echo "Metrics generator."
   echo
-  echo "Syntax: ./generateInputData.sh [-h] [-f FILE] [-n ENTRIES] [-m METRICS] [-s SCALE] [-v MAX_VALUE]"
+  echo "Syntax: ./generateInputData.sh [-h] [-f FILE] [-n ENTRIES] [-m METRICS] [-s SCALE] [-r RANGE]"
   echo "Run without parameters is equivalent to:"
-  echo "./generateInputData.sh -f test -n 100 -m 3 -s 1m -v 100"
+  echo "./generateInputData.sh -f test -n 500 -m 4 -s 1m -r 1000"
   echo
   echo "Optional arguments:"
   echo "-h     help menu;"
@@ -21,7 +21,7 @@ usage()
   echo "          m - for minutes,"
   echo "          h - for hours,"
   echo "          d - for days;"
-  echo "-v     max value."
+  echo "-r     values range."
 }
 
 #########################################################################
@@ -31,7 +31,7 @@ FILE_NAME="test"
 ENTRIES=500
 METRICS=4
 SCALE=$((60 * 1000)) # 1m
-MAX_VALUE=1000
+RANGE=1000
 
 function isDigit {
     re='^[0-9]+$'
@@ -46,7 +46,7 @@ function isDigit {
     fi
 }
 
-while getopts ":f:n:m:s:v:h" option; do
+while getopts ":f:n:m:s:r:h" option; do
     case $option in
         h)
            usage
@@ -84,9 +84,9 @@ while getopts ":f:n:m:s:v:h" option; do
            isDigit SCALE $SCALE
            SCALE=$(($SCALE * multiplier))
            ;;
-        v)
-           MAX_VALUE=${OPTARG}
-           isDigit MAX_VALUE $MAX_VALUE
+        r)
+           RANGE=${OPTARG}
+           isDigit RANGE $RANGE
            ;;
        \?)
            echo "Error: Invalid option." >&2
@@ -122,9 +122,9 @@ for i in $(seq 1 $ENTRIES)
         # increment current timestamp by step calculated using the chosen scale (for better distribution):
         timestamp=$(($timestamp + $step))
         # generate value (greater values correspond to greater METRIC_IDs):
-        max_value=$(($metric_id * $MAX_VALUE))
-        min_value=$((($metric_id - 1) * $MAX_VALUE))
-        value=$[$RANDOM % ($max_value - $min_value - 1) + $min_value]
+        max_value=$(($metric_id * $RANGE))
+        min_value=$((($metric_id - 1) * $RANGE))
+        value=$[$RANDOM % ($max_value - $min_value) + $min_value]
         RESULT="$metric_id, $timestamp, $value"
         echo $RESULT >> input/$FILE_NAME
     done
