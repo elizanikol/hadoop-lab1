@@ -20,9 +20,11 @@ SequenceFile
 <img width="590" alt="Screenshot 2022-04-20 at 01 12 52" src="https://user-images.githubusercontent.com/55412039/164110644-681916d0-2fbf-4971-8ffd-f909b2b74bce.png">
 
 Скриншот выходного Sequence файла в HDFS:
+
 <img width="586" alt="Screenshot 2022-04-20 at 01 12 27" src="https://user-images.githubusercontent.com/55412039/164110633-0ce24751-84fe-4583-9fd7-254ce34976fa.png">
 
 Результаты работы программы в более читаемом формате:
+
 <img width="446" alt="Screenshot 2022-04-20 at 01 08 16" src="https://user-images.githubusercontent.com/55412039/164110865-8b6145f5-5cd2-4a52-a6b6-869337de5700.png">
 
 ## MapReduce job
