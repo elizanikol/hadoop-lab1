@@ -29,9 +29,10 @@ SequenceFile
 
 ## MapReduce job
 
-## Сборка и запуск
 <img width="1351" alt="Screenshot 2022-04-20 at 01 00 34" src="https://user-images.githubusercontent.com/55412039/164110740-10405a2d-aa47-4c27-b7ca-3e73eac8ed60.png">
 <img width="1344" alt="Screenshot 2022-04-20 at 01 01 04" src="https://user-images.githubusercontent.com/55412039/164110765-a9aacecd-bedb-4259-a454-b715b146c29f.png">
+
+## Сборка и запуск
 
 Требования к ПО:
 ```bash
